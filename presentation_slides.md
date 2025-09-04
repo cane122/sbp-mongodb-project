@@ -194,7 +194,7 @@ db.people.aggregate([
 
 ### Kompleksni upiti (6-10)
 
-**6. Korelacija MBTI tipova sa životnim stilom influensera** (41.6ms)
+**6. Najčešće MBTI-lifestyle kombinacije kod influensera** (41.6ms)
 ```javascript
 db.people.aggregate([
   {$match: {type: "influencer"}},
@@ -246,7 +246,7 @@ db.people.aggregate([
 ```
 **Rezultat**: High-Adventure: 1,234 ($89k), College-Family: 987 ($67k)
 
-**10. Kompleksna analiza populacije kroz multiple dimenzije** (142.3ms)
+**10. Izveštaj o raznolikosti dataset-a (facet analiza)** (142.3ms)
 ```javascript
 db.people.aggregate([
   {$facet: {
