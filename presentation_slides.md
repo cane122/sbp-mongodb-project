@@ -204,7 +204,7 @@ db.people.aggregate([
 ```
 **Rezultat**: ISFP-Adventure: 892, ISFJ-Family: 743, ISTP-Adventure: 689
 
-**7. Demografska mapa - zemlje sa tipovima karaktera** (78.4ms)
+**7. Broj karaktera po zemljama i tipovima** (78.4ms)
 ```javascript
 db.people.aggregate([
   {$group: {
@@ -218,7 +218,7 @@ db.people.aggregate([
 ```
 **Rezultat**: USA-Influencer: 5,234 (24.1 god), Canada-Noble: 2,891 (30.2 god)
 
-**8. Ekstrovertnost vs introvertnost kroz nivoe obrazovanja** (89.7ms)
+**8. Koliko ima ekstroverata vs introverata po obrazovanju** (89.7ms)
 ```javascript
 db.people.aggregate([
   {$group: {
@@ -232,7 +232,7 @@ db.people.aggregate([
 ```
 **Rezultat**: High-I: 4,567 (25.3 god), College-E: 3,891 (26.7 god)
 
-**9. Socioekonomski profil: obrazovanje vs životni stil** (67.2ms)
+**9. Najčešće kombinacije obrazovanje + lifestyle** (67.2ms)
 ```javascript
 db.people.aggregate([
   {$match: {type: "influencer"}},
