@@ -191,12 +191,10 @@ db.people.aggregate([
 **Rezultat**: Razlika 5.6 godina (Noble stariji)
   {$sort: {total: -1}}, {$limit: 5}
 ])
-```
-**Rezultat**: ISFP: 5,783, ISFJ: 4,876, ISTP: 4,820
 
 ### Kompleksni upiti (6-10)
 
-**6. MBTI vs Lifestyle korelacija** (41.6ms)
+**6. Korelacija MBTI tipova sa životnim stilom influensera** (41.6ms)
 ```javascript
 db.people.aggregate([
   {$match: {type: "influencer"}},
@@ -206,7 +204,7 @@ db.people.aggregate([
 ```
 **Rezultat**: ISFP-Adventure: 892, ISFJ-Family: 743, ISTP-Adventure: 689
 
-**7. Geografska distribucija sa demografskim podacima** (78.4ms)
+**7. Demografska mapa - zemlje sa tipovima karaktera** (78.4ms)
 ```javascript
 db.people.aggregate([
   {$group: {
@@ -220,7 +218,7 @@ db.people.aggregate([
 ```
 **Rezultat**: USA-Influencer: 5,234 (24.1 god), Canada-Noble: 2,891 (30.2 god)
 
-**8. Analiza obrazaca ličnosti kroz različite grupe** (89.7ms)
+**8. Ekstrovertnost vs introvertnost kroz nivoe obrazovanja** (89.7ms)
 ```javascript
 db.people.aggregate([
   {$group: {
@@ -234,7 +232,7 @@ db.people.aggregate([
 ```
 **Rezultat**: High-I: 4,567 (25.3 god), College-E: 3,891 (26.7 god)
 
-**9. Uticaj nivoa obrazovanja na način života** (67.2ms)
+**9. Socioekonomski profil: obrazovanje vs životni stil** (67.2ms)
 ```javascript
 db.people.aggregate([
   {$match: {type: "influencer"}},
@@ -248,7 +246,7 @@ db.people.aggregate([
 ```
 **Rezultat**: High-Adventure: 1,234 ($89k), College-Family: 987 ($67k)
 
-**10. Sveobuhvatna demografska analiza** (142.3ms)
+**10. Kompleksna analiza populacije kroz multiple dimenzije** (142.3ms)
 ```javascript
 db.people.aggregate([
   {$facet: {
