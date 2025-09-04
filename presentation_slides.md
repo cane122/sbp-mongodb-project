@@ -2,7 +2,7 @@
 
 ## Slide 1: Title Slide
 **Sistemi baza podataka - Projekat**
-**Analiza podataka o influenserima i plemićima pomoću MongoDB-a**
+**Analiza MBTI ličnosti kroz MongoDB - Generisanje i analiza karaktera**
 
 - **Studenti**: [Your Name], [Partner Name]
 - **Fakultet**: Fakultet Tehničkih Nauka, Univerzitet u Novom Sadu
@@ -11,7 +11,26 @@
 
 ---
 
-## Slide 2: Pregled projekta
+## Slide 2: Šta je MBTI i naš dataset?
+### Myers-Briggs Type Indicator (MBTI) - 16 tipova ličnosti
+
+**MBTI dimenzije:**
+- **E/I** - Ekstrovertnost vs Introvertnost
+- **S/N** - Senzacija vs Intuicija  
+- **T/F** - Mišljenje vs Osećanje
+- **J/P** - Prosudba vs Percepcija
+
+**16 tipova**: INTJ, ENFP, ISFJ, ESTP, INFP, ENTJ, ISFP, ENTP, INFJ, ESTJ, ISTP, ESFJ, INTP, ESFP, ISTJ, ENFJ
+
+### Naš sintetički dataset
+- **Generisan GPT-3.5 Turbo modelom** za kreiranje karaktera
+- **Namena**: D&D kampanje, video igre, kreativno pisanje
+- **Raznovrsnost**: Različite uloge (influenseri, plemići) sa kompletnim personalnim profilima
+- **Realnost**: Statistički validni MBTI obrasci distribucije
+
+---
+
+## Slide 3: Pregled projekta
 ### Cilj projekta
 - Analiza velikog skupa podataka (>100MB)
 - Implementacija MongoDB baze podataka
@@ -19,33 +38,38 @@
 - Vizualizacija rezultata
 
 ### Datasets
-- **Influenser podaci**: 32,890 zapisa
-- **Plemić podaci**: 25,090 zapisa
+- **Influenser podaci**: 32,890 generisanih karaktera
+- **Plemić podaci**: 25,090 generisanih karaktera
 - **Ukupno**: 57,980 zapisa, >100MB
 
 ---
 
-## Slide 3: Opis skupa podataka
-### Influenser dataset
-- **Name** - Ime influensera
-- **Age** - Godine (18-51)
+## Slide 4: Opis karaktera i njihovih osobina
+### Influenser dataset - Moderni karakteri
+- **Name** - Ime influensera (generisano)
+- **Age** - Godine (18-51) 
 - **Sex** - Pol (Male/Female)
-- **Country of Origin** - Zemlja porekla
+- **Country of Origin** - Zemlja porekla (190+ zemalja)
 - **State or Province** - Pokrajina/država
-- **Education Level** - Nivo obrazovanja
-- **MBTI Personality** - Tip ličnosti
-- **Lifestyle** - Način života
-- **Backstory** - Lična priča
+- **Education Level** - Nivo obrazovanja (High school, College, Bachelor's, Master's)
+- **MBTI Personality** - Tip ličnosti (16 tipova)
+- **Lifestyle** - Način života (Adventure, Family, Luxury, Simple, etc.)
+- **Backstory** - Kreativna lična priča karaktera
 
-### Plemić dataset
-- **Name** - Ime plemića
+### Plemić dataset - Fantasy karakteri  
+- **Name** - Ime plemića (fantazija stil)
 - **Age** - Godine (18-77)
-- **Sex** - Pol (Male/Female)
-- **Realm** - Kraljevstvo
-- **Title** - Plemićka titula
-- **MBTI Personality** - Tip ličnosti
-- **Activity** - Glavna aktivnost
-- **Backstory** - Lična priča
+- **Sex** - Pol (Male/Female) 
+- **Realm** - Kraljevstvo (izmišljena imena)
+- **Title** - Plemićka titula (Duke, Earl, Baron, etc.)
+- **MBTI Personality** - Tip ličnosti (16 tipova)
+- **Activity** - Glavna aktivnost (Hunting, Diplomacy, War, etc.)
+- **Backstory** - Epska priča o poreklu i podvizima
+
+### Zašto MBTI analiza?
+- **Realizam**: Validni psihološki obrasci u generisanim karakterima
+- **Kreativnost**: Pomoć autorima i game master-ima za kreiranje balansiranih karaktera
+- **Statistika**: Analiza učestalosti tipova ličnosti u različitim ulogama i kulturama
 
 ---
 
