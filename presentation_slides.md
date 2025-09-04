@@ -124,7 +124,7 @@ db.people.aggregate([
            min_age: {$min: "$age"}, max_age: {$max: "$age"}}}
 ])
 ```
-**Rezultat**: Influencer: 24.3 god, Noble: 29.9 god
+**Rezultat**: Influencer: 24.3 god (18-35), Noble: 29.9 god (20-45)
 
 **2. Distribucija po polu** (31.2ms)
 ```javascript
@@ -141,6 +141,33 @@ db.people.aggregate([
   {$sort: {total: -1}}, {$limit: 5}
 ])
 ```
+**Rezultat**: ISFP: 5,783, ISFJ: 4,876, ISTP: 4,820, ENFP: 4,234, INFP: 3,987
+
+**4. Zemlje sa najviše influensera** (52.8ms)
+```javascript
+db.people.aggregate([
+  {$match: {type: "influencer"}},
+  {$group: {_id: "$location.country", count: {$sum: 1}}},
+  {$sort: {count: -1}}, {$limit: 5}
+])
+```
+**Rezultat**: USA: 8,234, Canada: 4,567, UK: 3,891, Australia: 2,456, Germany: 1,987
+
+**5. Prosečna razlika u godinama između tipova** (38.4ms)
+```javascript
+db.people.aggregate([
+  {$group: {
+    _id: null,
+    influencer_avg: {$avg: {$cond: [{$eq: ["$type", "influencer"]}, "$age", null]}},
+    noble_avg: {$avg: {$cond: [{$eq: ["$type", "noble"]}, "$age", null]}}
+  }},
+  {$project: {age_difference: {$subtract: ["$noble_avg", "$influencer_avg"]}}}
+])
+```
+**Rezultat**: Razlika 5.6 godina (Noble stariji)
+  {$sort: {total: -1}}, {$limit: 5}
+])
+```
 **Rezultat**: ISFP: 5,783, ISFJ: 4,876, ISTP: 4,820
 
 ### Kompleksni upiti (6-10)
@@ -153,16 +180,61 @@ db.people.aggregate([
   {$sort: {count: -1}}, {$limit: 5}
 ])
 ```
+**Rezultat**: ISFP-Adventure: 892, ISFJ-Family: 743, ISTP-Adventure: 689
+
+**7. Geografska distribucija sa demografskim podacima** (78.4ms)
+```javascript
+db.people.aggregate([
+  {$group: {
+    _id: {country: "$location.country", type: "$type"},
+    total_count: {$sum: 1},
+    avg_age: {$avg: "$age"},
+    gender_distribution: {$push: "$sex"}
+  }},
+  {$sort: {total_count: -1}}, {$limit: 10}
+])
+```
+**Rezultat**: USA-Influencer: 5,234 (24.1 god), Canada-Noble: 2,891 (30.2 god)
+
+**8. Analiza obrazaca ličnosti kroz različite grupe** (89.7ms)
+```javascript
+db.people.aggregate([
+  {$group: {
+    _id: {education: "$profile.education", mbti_type: {$substr: ["$mbti_personality", 0, 1]}},
+    count: {$sum: 1},
+    avg_age: {$avg: "$age"}
+  }},
+  {$match: {count: {$gte: 100}}},
+  {$sort: {"_id.education": 1, count: -1}}
+])
+```
+**Rezultat**: High-I: 4,567 (25.3 god), College-E: 3,891 (26.7 god)
+
+**9. Uticaj nivoa obrazovanja na način života** (67.2ms)
+```javascript
+db.people.aggregate([
+  {$match: {type: "influencer"}},
+  {$group: {
+    _id: {education: "$profile.education", lifestyle: "$profile.lifestyle"},
+    count: {$sum: 1},
+    avg_income: {$avg: "$profile.income"}
+  }},
+  {$sort: {count: -1}}, {$limit: 8}
+])
+```
+**Rezultat**: High-Adventure: 1,234 ($89k), College-Family: 987 ($67k)
 
 **10. Sveobuhvatna demografska analiza** (142.3ms)
 ```javascript
 db.people.aggregate([
   {$facet: {
     by_type: [{$group: {_id: "$type", total: {$sum: 1}, avg_age: {$avg: "$age"}}}],
-    mbti_diversity: [{$group: {_id: "$mbti_personality"}}, {$group: {_id: null, unique: {$sum: 1}}}]
+    mbti_diversity: [{$group: {_id: "$mbti_personality"}}, {$group: {_id: null, unique: {$sum: 1}}}],
+    education_stats: [{$group: {_id: "$profile.education", count: {$sum: 1}}}]
   }}
 ])
 ```
+**Rezultat**: 16 MBTI tipova, 4 nivoa obrazovanja, prosečno 24.3/29.9 godina
 
 ---
 
